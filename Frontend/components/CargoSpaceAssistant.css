@@ -1,0 +1,294 @@
+.cargospace-assistant {
+  position: fixed;
+  z-index: 44;
+  bottom: max(20px, env(safe-area-inset-bottom));
+  right: max(20px, env(safe-area-inset-right));
+  font-family: inherit;
+}
+
+.cargospace-assistant__launcher {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 999px;
+  color: white;
+  background: #102943;
+  box-shadow: 0 10px 30px rgba(8, 24, 40, 0.22);
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.cargospace-assistant__launcher-image {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.cargospace-assistant__launcher:hover {
+  transform: translateY(-2px);
+  background: #176092;
+  box-shadow: 0 14px 36px rgba(8, 24, 40, 0.27);
+}
+
+.cargospace-assistant__panel {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  display: flex;
+  width: min(390px, calc(100vw - 32px));
+  height: min(590px, calc(100dvh - 100px));
+  min-height: 350px;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #dce5ec;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 22px 60px rgba(8, 24, 40, 0.24);
+}
+
+.cargospace-assistant__header {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 11px;
+  padding: 14px;
+  color: white;
+  background: #102943;
+}
+
+.cargospace-assistant__avatar {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.24);
+  border-radius: 10px;
+  color: #a9dfff;
+  background: rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.cargospace-assistant__mascot {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.cargospace-assistant__icon-button {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  color: #d8e6f0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.cargospace-assistant__icon-button:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.cargospace-assistant__messages {
+  display: flex;
+  min-height: 0;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: 12px;
+  overflow-y: auto;
+  padding: 15px;
+  background: #f5f8fa;
+  overscroll-behavior: contain;
+}
+
+.cargospace-assistant__message {
+  max-width: 94%;
+  padding: 11px 12px;
+  border: 1px solid #e2e9ee;
+  border-radius: 11px;
+  color: #33485a;
+  background: white;
+  font-size: 13px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.cargospace-assistant__message--user {
+  align-self: flex-end;
+  border-color: #193a56;
+  color: white;
+  background: #193a56;
+}
+
+.cargospace-assistant__message--assistant {
+  align-self: flex-start;
+}
+
+.cargospace-assistant__action,
+.cargospace-assistant__suggestions button {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 7px 10px;
+  border: 1px solid #d7e1e8;
+  border-radius: 7px;
+  color: #15547b;
+  background: #f8fbfd;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 140ms ease, background-color 140ms ease;
+}
+
+.cargospace-assistant__action:hover,
+.cargospace-assistant__suggestions button:hover {
+  border-color: #83b6d5;
+  background: #e9f5fb;
+}
+
+.cargospace-assistant__suggestions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding-left: 2px;
+}
+
+.cargospace-assistant__typing {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: 4px;
+  padding: 12px;
+  border: 1px solid #e2e9ee;
+  border-radius: 10px;
+  background: white;
+}
+
+.cargospace-assistant__typing > span:not(.sr-only) {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #6295b5;
+  animation: assistant-typing 900ms ease-in-out infinite alternate;
+}
+
+.cargospace-assistant__typing > span:nth-child(2) { animation-delay: 150ms; }
+.cargospace-assistant__typing > span:nth-child(3) { animation-delay: 300ms; }
+
+@keyframes assistant-typing {
+  to { transform: translateY(-3px); opacity: 0.42; }
+}
+
+.cargospace-assistant__composer {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 12px;
+  border-top: 1px solid #e7edf1;
+  background: white;
+}
+
+.cargospace-assistant__composer input {
+  min-width: 0;
+  height: 42px;
+  flex: 1 1 auto;
+  padding: 0 12px;
+  border: 1px solid #d9e2e9;
+  border-radius: 8px;
+  outline: none;
+  color: #102943;
+  background: white;
+  font-size: 13px;
+}
+
+.cargospace-assistant__composer input:focus {
+  border-color: #4989b1;
+  box-shadow: 0 0 0 3px rgba(73, 137, 177, 0.14);
+}
+
+.cargospace-assistant__composer input:disabled {
+  background: #f5f8fa;
+}
+
+.cargospace-assistant__composer button {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 0;
+  border-radius: 8px;
+  color: white;
+  background: #102943;
+  cursor: pointer;
+}
+
+.cargospace-assistant__composer button:hover:not(:disabled) {
+  background: #176092;
+}
+
+.cargospace-assistant__composer button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.cargospace-assistant__note {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  margin: 0;
+  padding: 0 0 8px;
+  color: #8293a0;
+  background: white;
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.cargospace-assistant :focus-visible {
+  outline: 2px solid #48a1d4;
+  outline-offset: 2px;
+}
+
+@media (max-width: 480px) {
+  .cargospace-assistant {
+    bottom: max(14px, env(safe-area-inset-bottom));
+    right: max(14px, env(safe-area-inset-right));
+  }
+
+  .cargospace-assistant__panel {
+    bottom: 58px;
+    right: 0;
+    width: min(390px, calc(100vw - 48px));
+    height: min(590px, calc(100dvh - 90px));
+  }
+
+  .cargospace-assistant__launcher {
+    min-height: 46px;
+    padding: 0 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cargospace-assistant__typing > span:not(.sr-only) {
+    animation: none;
+  }
+}

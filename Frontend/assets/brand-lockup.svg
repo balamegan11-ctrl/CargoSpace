@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 210" fill="none">
+  <g stroke-linejoin="round">
+    <path d="M117 39 167 14l51 25-51 26-50-26Z" fill="#353535"/>
+    <path d="m117 45 45 23v64l-45-23V45Z" fill="#353535"/>
+    <path d="m170 68 48-24v64l-48 24V68Z" fill="#353535"/>
+    <path d="m222 15 71 36v9h55v9h30l29 17-29 17h-30v9h-55v9l-71 35V15Z" fill="#08264A"/>
+    <path d="M252 51h38v5h43M252 73h49v5h52M252 106h52v5h49M252 128h39v5h42" stroke="#fff" stroke-width="4"/>
+    <path d="M220 57c-18 0-32 14-32 32 0 23 32 57 32 57s32-34 32-57c0-18-14-32-32-32Z" fill="#fff"/>
+    <circle cx="220" cy="89" r="11" fill="#353535"/>
+  </g>
+  <text x="210" y="198" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="47" font-weight="800" letter-spacing="0">
+    <tspan fill="#353535">CARGO</tspan><tspan fill="#08264A">SPACE</tspan>
+  </text>
+</svg>
