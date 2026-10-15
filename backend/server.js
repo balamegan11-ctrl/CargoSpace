@@ -1348,15 +1348,18 @@ app.post('/api/payments/confirm', (req, res) => {
 })
 
 app.post('/api/bookings/:bookingId/cancel', (req, res) => {
-  const identity = requireIdentity(req, res, 'user')
+  const identity = requireIdentity(req, res)
   if (!identity) return
   const reason = String(req.body?.reason || '').trim()
   if (!reason) return res.status(400).json({ success: false, message: 'A cancellation reason is required.' })
-  const booking = db.prepare('SELECT * FROM bookings WHERE booking_id = ? AND user_id = ?').get(req.params.bookingId, identity.id)
-  if (!booking) return res.status(404).json({ success: false, message: 'Booking not found for this account.' })
+  const booking = db.prepare('SELECT * FROM bookings WHERE booking_id = ?').get(req.params.bookingId)
+  if (!booking) return res.status(404).json({ success: false, message: 'Booking not found.' })
+  if (identity.role !== 'admin' && booking.user_id && booking.user_id !== identity.id) {
+    return res.status(403).json({ success: false, message: 'Booking not found for this account.' })
+  }
   if (booking.status === 'Cancelled') return res.status(409).json({ success: false, message: 'This booking is already cancelled.' })
   const cancelledAt = new Date().toISOString()
-  db.prepare("UPDATE bookings SET status = 'Cancelled', cancellation_reason = ?, cancelled_at = ?, refund_status = ? WHERE booking_id = ? AND user_id = ?").run(reason, cancelledAt, booking.payment_status === 'PAID' ? 'PENDING' : 'NOT_APPLICABLE', booking.booking_id, identity.id)
+  db.prepare("UPDATE bookings SET status = 'Cancelled', cancellation_reason = ?, cancelled_at = ?, refund_status = ? WHERE booking_id = ?").run(reason, cancelledAt, booking.payment_status === 'PAID' ? 'PENDING' : 'NOT_APPLICABLE', booking.booking_id)
   const updatedBooking = db.prepare('SELECT * FROM bookings WHERE booking_id = ?').get(booking.booking_id)
   io.emit('booking_cancelled', updatedBooking)
   io.emit('space_updated', getContainerAvailability(booking.container_id))

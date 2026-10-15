@@ -207,6 +207,17 @@ function ProviderDashboardContent() {
                 <BookingDetail label="Payment method" value={booking.payment_method || 'Not paid'} />
                 <BookingDetail label="Payment date" value={booking.payment_date ? new Date(booking.payment_date).toLocaleDateString('en-IN') : 'Not paid'} />
                 <BookingDetail label="Receipt number" value={booking.receipt_number} />
+                {booking.status === 'Cancelled' && (
+                  <div className="sm:col-span-2 lg:col-span-3 rounded-lg border border-rose-200 bg-rose-50/70 p-3">
+                    <dt className="text-xs font-bold uppercase tracking-wide text-rose-800">Cancellation feedback &amp; reason</dt>
+                    <dd className="mt-1 font-semibold text-rose-950">{booking.cancellation_reason || 'No specific reason provided'}</dd>
+                    {booking.cancelled_at && (
+                      <p className="mt-1 text-[11px] font-medium text-rose-700">
+                        Cancelled at: {new Date(booking.cancelled_at).toLocaleString('en-IN')}
+                      </p>
+                    )}
+                  </div>
+                )}
               </dl>
               <div className="flex flex-wrap items-center justify-between gap-3 border-t border-slate-100 pt-4">
                 <p className="inline-flex items-center gap-2 text-sm font-semibold text-slate-600"><CreditCard size={16} className="text-brand-600" />Payment record</p>
